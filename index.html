@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Для тебя ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Marck+Script&family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            touch-action: manipulation;
+            overflow: hidden;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0c0b1a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            font-family: 'Caveat', cursive;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 5; /* Уменьшил z-index чтобы был под сердечками */
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(231, 76, 132, 0.25),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin: 0 auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Скрываем скроллбар */
+        .container::-webkit-scrollbar {
+            width: 3px;
+        }
+        
+        .container::-webkit-scrollbar-thumb {
+            background: rgba(255, 64, 129, 0.5);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #ff9ec0;
+            text-shadow: 0 0 10px #ff4081;
+            animation: glow 2s ease-in-out infinite alternate;
+            line-height: 1.2;
+            padding: 0 10px;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff4081; }
+            to { text-shadow: 0 0 20px #ff79a9, 0 0 30px #ff4081; }
+        }
+
+        .date {
+            font-family: 'Marck Script', cursive;
+            font-size: 1.5rem;
+            color: #a3d9ff;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        #mainHeart {
+            font-size: 6.5rem;
+            cursor: pointer;
+            margin: 20px 0;
+            display: inline-block;
+            transition: all 0.3s;
+            color: #ff4d8f;
+            filter: drop-shadow(0 0 15px #ff0066);
+            animation: heartbeat 1.2s infinite;
+            user-select: none;
+            -webkit-user-select: none;
+            z-index: 10;
+            position: relative;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .message-container {
+            min-height: 120px;
+            margin: 25px 0;
+            padding: 20px 15px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            border-left: 4px solid #ff4081;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        #message {
+            font-size: 2.2rem;
+            font-family: 'Marck Script', cursive;
+            line-height: 1.3;
+            color: #ffebf3;
+            opacity: 1;
+            transition: opacity 0.6s ease;
+            padding: 0 5px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 10px;
+            position: relative;
+            z-index: 5;
+        }
+
+        button {
+            padding: 16px 20px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #ff4081, #ff9ec0);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+            user-select: none;
+            -webkit-user-select: none;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+        }
+
+        button:active {
+            transform: scale(0.96);
+            box-shadow: 0 2px 8px rgba(255, 64, 129, 0.6);
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-size: 1.6rem;
+            color: #a3d9ff;
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+            padding-bottom: 10px;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Летающие сердечки - ВЫШЕ ВСЕГО! */
+        #heartsContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100; /* Теперь сердечки поверх всего! */
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0;
+            color: #ff9ec0;
+            animation: float linear forwards;
+            user-select: none;
+            pointer-events: none;
+            z-index: 100;
+            text-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0.9;
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg) scale(1.2);
+            }
+        }
+
+        /* Для ливня сердечек */
+        .heart-rain {
+            animation: rainFloat linear forwards;
+        }
+
+        @keyframes rainFloat {
+            0% {
+                opacity: 0.9;
+                transform: translateY(-50px) rotate(0deg) scale(0.7);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg) scale(1.1);
+            }
+        }
+
+        /* Свайп-подсказка */
+        .swipe-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            animation: pulseHint 2s infinite;
+            display: none;
+            z-index: 5;
+        }
+
+        @keyframes pulseHint {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Ландшафтная ориентация */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .container {
+                max-height: 85vh;
+                padding: 15px;
+                max-width: 90%;
+            }
+            
+            h1 { font-size: 2.2rem; }
+            #mainHeart { font-size: 4.5rem; margin: 10px 0; }
+            #message { font-size: 1.8rem; }
+            .message-container { min-height: 90px; margin: 15px 0; }
+            button { padding: 12px 15px; font-size: 1.5rem; min-height: 50px; }
+            .date { font-size: 1.3rem; margin-bottom: 15px; }
+        }
+
+        /* Большие телефоны */
+        @media (min-width: 500px) and (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            h1 { font-size: 3.2rem; }
+            #mainHeart { font-size: 7rem; }
+        }
+
+        /* Очень маленькие экраны */
+        @media (max-width: 350px) {
+            h1 { font-size: 2.3rem; }
+            #message { font-size: 1.9rem; }
+            #mainHeart { font-size: 5.5rem; }
+            button { font-size: 1.6rem; }
+        }
+
+        /* Портретная ориентация - показываем подсказку */
+        @media (orientation: portrait) and (max-height: 800px) {
+            .swipe-hint {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="heartsContainer"></div>
+    
+    <div class="swipe-hint">
+        <i class="fas fa-hand-point-up"></i> Листай вниз
+    </div>
+
+    <div class="container">
+        <h1><i class="fas fa-heart"></i> Для моей самой-самой <i class="fas fa-heart"></i></h1>
+        <p class="date">14 февраля · Наша первая валентинка 💘</p>
+
+        <div id="mainHeart" title="Тапни меня!">❤️</div>
+
+        <div class="message-container">
+            <div id="message">Ты делаешь мой мир ярче с каждой секундой...</div>
+        </div>
+
+        <div class="controls">
+            <button id="nextBtn">
+                <i class="fas fa-forward"></i> Ещё одно признание
+            </button>
+            <button id="heartRainBtn">
+                <i class="fas fa-heart-broken"></i> Сердечный ливень
+            </button>
+            <button id="tapBtn">
+                <i class="fas fa-hand-pointer"></i> Режим рисования
+            </button>
+        </div>
+
+        <div class="signature">
+            Целую и обнимаю крепко, твой Витя <i class="fas fa-heart" style="color:#ff4d8f;"></i>
+            <div style="font-size: 1.2rem; margin-top: 5px; color: rgba(255, 255, 255, 0.5);">
+                С любовью к тебе одной
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== МАССИВ С ПОСЛАНИЯМИ ==========
+        const phrases = [
+            "Ты делаешь мой мир ярче с каждой секундой...",
+            "Люблю твои глазки, когда ты смеёшься! 😊",
+            "Ты моё самое большое счастье!",
+            "С тобой даже обычный день становится волшебным.",
+            "Обнимать тебя — моё любимое занятие 🤗",
+            "Ты пахнешь как любовь и счастье...",
+            "Спасибо, что ты у меня есть, родная!",
+            "Целую тебя в щёчку, в носик, в губки 💋",
+            "Хочу засыпать и просыпаться только с тобой.",
+            "Ты — причина моей улыбки каждое утро.",
+            "Мне так повезло, что ты выбрала меня!",
+            "Ты прекрасна даже в пижаме с мишками 🧸",
+            "Моё сердце забилось чаще, когда я тебя увидел...",
+            "Ты самая лучшая девочка на свете!",
+            "Люблю тебя больше, чем пельмени с майонезом 😄"
+        ];
+
+        // ========== ПЕРЕМЕННЫЕ ==========
+        let currentPhraseIndex = 0;
+        let drawMode = false;
+        let lastTapTime = 0;
+        let isDrawing = false;
+        
+        // Элементы
+        const messageEl = document.getElementById('message');
+        const nextBtn = document.getElementById('nextBtn');
+        const heartRainBtn = document.getElementById('heartRainBtn');
+        const tapBtn = document.getElementById('tapBtn');
+        const mainHeart = document.getElementById('mainHeart');
+        const heartsContainer = document.getElementById('heartsContainer');
+        const container = document.querySelector('.container');
+
+        // ========== ОСНОВНЫЕ ФУНКЦИИ ==========
+        function showNextPhrase() {
+            messageEl.style.opacity = 0;
+            setTimeout(() => {
+                currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                messageEl.textContent = phrases[currentPhraseIndex];
+                // Добавляем эмодзи к некоторым фразам
+                const emojis = ['💖', '🌟', '🥰', '✨', '🌸', '💕'];
+                if (Math.random() > 0.6) {
+                    messageEl.innerHTML += ` ${emojis[Math.floor(Math.random() * emojis.length)]}`;
+                }
+                messageEl.style.opacity = 1;
+            }, 300);
+        }
+
+        function createFloatingHeart(x, y, special = false, isRain = false) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            
+            // Разные типы сердечек
+            const heartTypes = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍', '💘', '💝', '💖', '💗', '💓', '💞', '💕'];
+            heart.innerHTML = special ? '💘' : heartTypes[Math.floor(Math.random() * heartTypes.length)];
+            
+            // Размер
+            const size = special ? 28 : (Math.random() * 20 + 18);
+            heart.style.fontSize = `${size}px`;
+            heart.style.left = `${x - size/2}px`;
+            heart.style.top = `${y - size/2}px`;
+            
+            // Цвет
+            const colors = ['#ff9ec0', '#ff4081', '#ff79a9', '#ffb6c1', '#ff4d8f', '#ff6699', '#ff3366'];
+            heart.style.color = special ? '#ff0066' : colors[Math.floor(Math.random() * colors.length)];
+            
+            // Для ливня другая анимация
+            if (isRain) {
+                heart.style.animationName = 'rainFloat';
+                heart.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                heart.style.left = `${Math.random() * window.innerWidth}px`;
+                heart.style.top = `-50px`;
+            } else {
+                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            }
+            
+            heartsContainer.appendChild(heart);
+            
+            // Удаляем после анимации
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.remove();
+                }
+            }, (isRain ? 3000 : 5000));
+        }
+
+        // ФИКС: Правильная функция ливня
+        function makeHeartRain(count = 50) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    createFloatingHeart(0, 0, false, true);
+                }, i * 50); // Задержка между сердечками
+            }
+        }
+
+        function toggleDrawMode() {
+            drawMode = !drawMode;
+            tapBtn.innerHTML = drawMode 
+                ? '<i class="fas fa-times"></i> Выключить рисование' 
+                : '<i class="fas fa-hand-pointer"></i> Режим рисования';
+            
+            // Виброотклик (если поддерживается)
+            if (navigator.vibrate) {
+                navigator.vibrate(drawMode ? [50] : [20, 50, 20]);
+            }
+        }
+
+        // ========== ТАЧ-СОБЫТИЯ (ИСПРАВЛЕНО) ==========
+        // Тап по основному сердцу
+        mainHeart.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const now = Date.now();
+            if (now - lastTapTime < 300) { // Двойной тап
+                this.style.transform = 'scale(1.8) rotate(360deg)';
+                makeHeartRain(30);
+            } else {
+                this.style.transform = 'scale(1.4) rotate(15deg)';
+                // Создаем сердечки вокруг центра сердца
+                for (let i = 0; i < 12; i++) {
+                    setTimeout(() => {
+                        const angle = Math.random() * Math.PI * 2;
+                        const radius = Math.random() * 80 + 40;
+                        const x = centerX + radius * Math.cos(angle);
+                        const y = centerY + radius * Math.sin(angle);
+                        createFloatingHeart(x, y, true);
+                    }, i * 30);
+                }
+            }
+            lastTapTime = now;
+            
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 400);
+        });
+
+        // Свайп вниз по контейнеру - следующий текст
+        let startY = 0;
+        container.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        }, {passive: true});
+
+        container.addEventListener('touchend', (e) => {
+            const endY = e.changedTouches[0].clientY;
+            const diff = startY - endY;
+            
+            // Свайп вниз на 50px
+            if (diff > 50) {
+                showNextPhrase();
+                // Легкая вибрация
+                if (navigator.vibrate) navigator.vibrate(30);
+            }
+        }, {passive: true});
+
+        // ФИКС: Правильное рисование сердечек
+        document.addEventListener('touchstart', (e) => {
+            if (!drawMode) return;
+            isDrawing = true;
+            const touch = e.touches[0];
+            createFloatingHeart(touch.clientX, touch.clientY, true);
+        }, {passive: true});
+
+        document.addEventListener('touchmove', (e) => {
+            if (!drawMode || !isDrawing) return;
+            
+            const touch = e.touches[0];
+            // Создаем меньше сердечек при движении, чтобы не перегружать
+            if (Math.random() > 0.3) {
+                createFloatingHeart(touch.clientX, touch.clientY);
+            }
+        }, {passive: true});
+
+        document.addEventListener('touchend', () => {
+            isDrawing = false;
+        }, {passive: true});
+
+        // Также рисование для мыши (на всякий случай)
+        document.addEventListener('mousedown', (e) => {
+            if (!drawMode) return;
+            isDrawing = true;
+            createFloatingHeart(e.clientX, e.clientY, true);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!drawMode || !isDrawing) return;
+            if (Math.random() > 0.5) {
+                createFloatingHeart(e.clientX, e.clientY);
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDrawing = false;
+        });
+
+        // ========== КНОПКИ ==========
+        nextBtn.addEventListener('click', showNextPhrase);
+        
+        // ФИКС: Ливень работает правильно
+        heartRainBtn.addEventListener('click', () => {
+            makeHeartRain(60);
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        });
+        
+        tapBtn.addEventListener('click', toggleDrawMode);
+
+        // ========== АВТОСТАРТ ==========
+        window.addEventListener('load', function() {
+            // Несколько сердечек при загрузке
+            setTimeout(() => makeHeartRain(15), 500);
+            
+            // Автопрокрутка сообщений каждые 10 сек
+            setInterval(showNextPhrase, 10000);
+            
+            // Подсказка для двойного тапа
+            setTimeout(() => {
+                mainHeart.style.animation = 'heartbeat 1.2s infinite, pulseHint 2s 3';
+            }, 2000);
+            
+            // Немного сердечек в случайных местах
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    createFloatingHeart(x, y);
+                }, i * 200);
+            }
+        });
+
+        // Предотвращаем контекстное меню при долгом тапе
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+    </script>
+</body>
+</html>
